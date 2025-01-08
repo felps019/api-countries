@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Footer = () => {
-  return (
-    <footer className='py-6 mb-8'>
-      <p className='text-center'>Direitos autorais reservados.</p>
-    </footer>
-  )
-}
+	return (
+		<footer className="py-6 mt-8">
+			<p className="text-center">Direitos autorais reservados.</p>
+		</footer>
+	);
+};
 
-export default Footer
+export default Footer;
