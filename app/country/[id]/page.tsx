@@ -43,7 +43,6 @@ export default function Country() {
 	useEffect(() => {
 		const fetchCountries = async () => {
 			const [response, error] = await countriesApi.getCountry(id);
-			console.log("api response", response);
 			setLoading(false);
 			if (error) {
 				setError(error);
@@ -79,7 +78,7 @@ export default function Country() {
 		.map(({ name, symbol }) => `${name} ${symbol}`)
 		.join(", ");
 	const [topLevelDomain] = tld ?? [];
-	const bordersIds = borders?.join(", ") ?? "";
+	const bordersIds = borders ?? [];
 
 	return (
 		<>
@@ -109,33 +108,44 @@ export default function Country() {
 						{countryName} {id}
 					</h2>
 					<div className="space-y-2">
-						<div className="flex items-center gap-1">
+						<div>
 							<span className="font-semibold">Capital:</span>
-							<span>{capitalName}</span>
+							{capitalName}
 						</div>
-						<div className="flex items-center gap-1">
+						<div>
 							<span className="font-semibold">Region:</span>
-							<span>{region}</span>
+							{region}
 						</div>
-						<div className="flex items-center gap-1">
+						<div>
 							<span className="font-semibold">Population:</span>
-							<span>{population}</span>
+							{population}
 						</div>
-						<div className="flex items-center gap-1">
+						<div>
 							<span className="font-semibold">Languages:</span>
-							<span>{languagesNames}</span>
+							{languagesNames}
 						</div>
-						<div className="flex items-center gap-1">
+						<div>
 							<span className="font-semibold">Currencies:</span>
-							<span>{currenciesNames}</span>
+							{currenciesNames}
 						</div>
-						<div className="flex items-center gap-1">
+						<div>
 							<span className="font-semibold">Top Level Domain:</span>
-							<span>{topLevelDomain}</span>
+							{topLevelDomain}
 						</div>
-						<div className="flex items-center gap-1">
+						<div className="md: max-w-80">
 							<span className="font-semibold">Borders:</span>
-							<span>{bordersIds}</span>
+							{bordersIds.length > 0
+								? bordersIds.map((borderId) => (
+										<Link key={borderId} href={`/country/${borderId}`}>
+											<button
+												className="bg-gray-200 hover:bg-gray-300 text-xs mb-[6px] mr-1 px-1 py-1 rounded"
+												type="submit"
+											>
+												{borderId}
+											</button>
+										</Link>
+									))
+								: "None"}
 						</div>
 					</div>
 				</div>
